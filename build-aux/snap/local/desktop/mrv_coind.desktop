@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=MRV_Coin Daemon SNAP
+Comment=main
+GenericName=MRV_Coin Digital Currency Daemon Client main network
+Exec=mrv_coin-core.daemon %u
+Terminal=true
+Type=Application
+Icon=${SNAP}/share/pixmaps/mrv_coin.png
+MimeType=x-scheme-handler/mrv;
+Categories=X-Office;X-Finance;
+Keywords=internet;mrv_coin;zmrv;core;wallet;daemon;main;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0

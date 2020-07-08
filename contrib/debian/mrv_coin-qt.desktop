@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=MRV_Coin
+Comment=MRV_Coin P2P Cryptocurrency
+Comment[fr]=MRV_Coin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=MRV_Coin, eşten eşe kriptografik sanal para birimi
+Exec=mrv_coin-qt %u
+Terminal=false
+Type=Application
+Icon=mrv_coin128
+MimeType=x-scheme-handler/mrv_coin;
+Categories=Office;Finance;
+StartupWMClass=MRV_Coin-qt

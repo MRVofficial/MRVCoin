@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=MRV_Coin
+Comment=MRV_Coin QT main network
+GenericName=MRV_Coin Digital Currency QT client main network
+Exec=mrv_coin-core.qt %u
+Terminal=false
+Type=Application
+Icon=${SNAP}/share/pixmaps/mrv_coin.png
+MimeType=x-scheme-handler/mrv_coin;
+Categories=X-Office;X-Finance;
+Keywords=internet;mrv_coin;zmrv;mrv;core;wallet;qt;main;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0

@@ -1,0 +1,3 @@
+usr/local/bin/mrv_coind usr/bin
+usr/local/bin/mrv_coin-cli usr/bin
+debian/examples/mrv_coin.conf etc/mrv_coin

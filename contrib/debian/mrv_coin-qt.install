@@ -1,0 +1,6 @@
+usr/local/bin/mrv_coin-qt usr/bin
+share/pixmaps/mrv_coin32.xpm usr/share/pixmaps
+share/pixmaps/mrv_coin16.xpm usr/share/pixmaps
+share/pixmaps/mrv_coin128.png usr/share/pixmaps
+debian/mrv_coin-qt.desktop usr/share/applications
+debian/mrv_coin-qt.protocol usr/share/kde4/services/

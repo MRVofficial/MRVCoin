@@ -1,0 +1,11 @@
+[Protocol]
+exec=mrv_coin-qt '%u'
+protocol=mrv_coin
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false
