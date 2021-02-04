@@ -15,6 +15,8 @@
 
 #include <QDir>
 
+#define REQUEST_UPDATE_MN_COUNT 0
+
 SettingsInformationWidget::SettingsInformationWidget(MRV_CoinGUI* _window,QWidget *parent) :
     PWidget(_window,parent),
     ui(new Ui::SettingsInformationWidget)
@@ -73,7 +75,7 @@ SettingsInformationWidget::SettingsInformationWidget(MRV_CoinGUI* _window,QWidge
     ui->labelInfoName->setText(tr("Main"));
     ui->labelInfoName->setProperty("cssClass", "text-main-settings");
     ui->labelInfoConnections->setText("0 (In: 0 / Out: 0)");
-    ui->labelInfoMasternodes->setText("Total: 0 (IPv4: 0 / IPv6: 0 / Tor: 0 / Unknown: 0");
+    ui->labelInfoMasternodes->setText("Total: 0 (IPv4: 0 / IPv6: 0 / Tor: 0 / Unknown: 0)");
 
     // Information Blockchain
     ui->labelInfoBlockNumber->setText("0");
@@ -159,6 +161,38 @@ void SettingsInformationWidget::openNetworkMonitor()
         rpcConsole->setClientModel(clientModel);
     }
     rpcConsole->showNetwork();
+}
+
+void SettingsInformationWidget::showEvent(QShowEvent *event)
+{
+	QWidget::showEvent(event);
+	if (clientModel) {
+		clientModel->startMasternodesTimer();
+		// Initial masternodes count value, running in a worker thread to not lock mnmanager mutex in the main thread.
+		execute(REQUEST_UPDATE_MN_COUNT);
+	}
+}
+
+void SettingsInformationWidget::hideEvent(QHideEvent *event) {
+	QWidget::hideEvent(event);
+	if (clientModel) {
+		clientModel->stopMasternodesTimer();
+	}
+}
+
+void SettingsInformationWidget::run(int type)
+{
+	if (type == REQUEST_UPDATE_MN_COUNT) {
+		QMetaObject::invokeMethod(this, "setMasternodeCount",
+			Qt::QueuedConnection, Q_ARG(QString, clientModel->getMasternodesCount()));
+	}
+}
+
+void SettingsInformationWidget::onError(QString error, int type)
+{
+	if (type == REQUEST_UPDATE_MN_COUNT) {
+		setMasternodeCount(tr("No available data"));
+	}
 }
 
 SettingsInformationWidget::~SettingsInformationWidget()

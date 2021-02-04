@@ -87,6 +87,13 @@ public:
 
     bool getTorInfo(std::string& ip_port) const;
 
+	// Start/Stop the masternode polling timer
+	void startMasternodesTimer();
+	void stopMasternodesTimer();
+	// Force a MN count update calling mnmanager directly locking its internal mutex.
+	// Future todo: implement an event based update and remove the lock requirement.
+	QString getMasternodesCount();
+
 private:
     QString getMasternodeCountString() const;
     OptionsModel* optionsModel;

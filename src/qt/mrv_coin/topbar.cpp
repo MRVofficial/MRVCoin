@@ -584,7 +584,7 @@ void TopBar::updateTorIcon()
 void TopBar::refreshStatus()
 {
     // Check lock status
-    if (!this->walletModel)
+    if (!walletModel || !walletModel->hasWallet())
         return;
 
     WalletModel::EncryptionStatus encStatus = walletModel->getEncryptionStatus();

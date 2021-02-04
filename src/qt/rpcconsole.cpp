@@ -488,9 +488,12 @@ void RPCConsole::setClientModel(ClientModel* model)
         for (size_t i = 0; i < commandList.size(); ++i)
         {
             wordList << commandList[i].c_str();
+			wordList << ("help " + commandList[i]).c_str();
         }
 
+		wordList.sort();
         autoCompleter = new QCompleter(wordList, this);
+		autoCompleter->setModelSorting(QCompleter::CaseSensitivelySortedModel);
         ui->lineEdit->setCompleter(autoCompleter);
 
         // clear the lineEdit after activating from QCompleter
@@ -958,6 +961,7 @@ void RPCConsole::showEvent(QShowEvent* event)
 
     // start PeerTableModel auto refresh
     clientModel->getPeerTableModel()->startAutoRefresh();
+	clientModel->startMasternodesTimer();
 }
 
 void RPCConsole::hideEvent(QHideEvent* event)
@@ -969,6 +973,7 @@ void RPCConsole::hideEvent(QHideEvent* event)
 
     // stop PeerTableModel auto refresh
     clientModel->getPeerTableModel()->stopAutoRefresh();
+	clientModel->stopMasternodesTimer();
 }
 
 void RPCConsole::showBackups()

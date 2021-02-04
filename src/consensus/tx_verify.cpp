@@ -88,6 +88,17 @@ bool CheckTransaction(const CTransaction& tx, CValidationState& state, bool fCol
         }
     }
 
+	std::set<COutPoint> vInOutPoints;
+
+	for (const CTxIn& txin : tx.vin) {
+		// Check for duplicate inputs
+
+		if (vInOutPoints.count(txin.prevout))
+			return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-duplicate");
+
+		vInOutPoints.insert(txin.prevout);
+	}
+
     if (tx.IsCoinBase()) {
         if (tx.vin[0].scriptSig.size() < 2 || tx.vin[0].scriptSig.size() > 150)
             return state.DoS(100, false, REJECT_INVALID, "bad-cb-length");
